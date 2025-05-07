@@ -3,12 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-
-
-app.post('/gpa', (req, res) => {
-    let totalPoints = 0;
-    let totalCredits = 0;
-    const gradePoints = {
+const gradePoints = {
   "A": 4.0,
   "A-": 3.7,
   "B+": 3.3,
@@ -20,14 +15,22 @@ app.post('/gpa', (req, res) => {
   "D": 1.0,
   "F": 0.0
 }
+
+app.post('/gpa', (req, res) => {
+    let totalPoints = 0;
+    let totalCredits = 0;
+
+
+  if (!Array.isArray(req.body)) {
+    return res.status(400).send({ error: 'Expected an array of courses' });
+  }
   for (const { credits, grade } of req.body) {
     if (!credits || !grade) {
       return res.status(400).send({ error: 'Missing credits or grade' });
     }
 
     if (typeof credits !== 'number' || !gradePoints[grade]) {
-      return res.status(400).send({ error: 'Invalid credits or grade' });
-    }
+      return res.status(400).send({ error: `Invalid entry: ${grade} or ${credits}` });    }
 
     totalPoints += credits * gradePoints[grade];
     totalCredits += credits;
@@ -37,19 +40,6 @@ app.post('/gpa', (req, res) => {
   res.send({ gpa });
 })
 
-app.listen(3000);
-
-// const http = require('node:http');
-
-// const hostname = '127.0.0.1';
-// const port = 3000;
-
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'text/plain');
-//   res.end('Hello, World!\n');
-// });
-
-// server.listen(port, hostname, () => {
-//   console.log(`Server running at http://${hostname}:${port}/`);
-// });
+app.listen(3000, () => {
+  console.log('GPA microservice running at http://localhost:3000');
+});
