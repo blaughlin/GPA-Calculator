@@ -8,7 +8,7 @@ const testData = [
 
 async function testGpaCalculator() {
   try {
-    const response = await fetch("http://localhost:3000/gpa", {
+    const response = await fetch("https://gpa-microservice.onrender.com/gpa", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(testData)
