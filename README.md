@@ -60,4 +60,6 @@ const result = await response.json();
 console.log("GPA:", result.gpa); // Outputs: "3.24"
 ```
 
+## UML
+
 ![UML Sequence Diagram](/UML.png)
