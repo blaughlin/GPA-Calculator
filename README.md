@@ -8,7 +8,7 @@ Hosted on Render free tier so response may take 30 seconds for server to load.
 ### ✅ How to Programmatically **Request** Data
 
 - **Method**: `POST`
-- **Endpoint**: `http://localhost:3000/gpa`
+- **Endpoint**: `"http://gpa-microservice.onrender.com/gpa"`
 - **Headers**:
   - `Content-Type: application/json`
 - **Body Format**: JSON array of course objects, each with:
@@ -59,3 +59,5 @@ const response = await fetch("http://gpa-microservice.onrender.com/gpa", {
 const result = await response.json();
 console.log("GPA:", result.gpa); // Outputs: "3.24"
 ```
+
+![UML Sequence Diagram](/UMLpng)
