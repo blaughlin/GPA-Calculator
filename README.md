@@ -1,51 +1,50 @@
-#📡 GPA Calculator Microservice
+# 📡 GPA Calculator Microservice
+
+This microservice calculates GPA from a list of course grades and credit values using a REST API.
 Hosted on Render free tier so response may take 30 seconds for server to load.
-#📝 Communication Contract
 
-#✅ How to Programmatically REQUEST Data
-Method
-POST
-#Endpoint
-https://gpa-microservice.onrender.com/gpa"
-#Header:
-Content-Type: application/json
-#Body Format
-JSON array of course objects each with: credits (number), grade (string, eg "A", "B+", "C-")
+## 🔐 Communication Contract
 
-#Example Request (JavaScript)
+### ✅ How to Programmatically **Request** Data
 
-<pre>
+- **Method**: `POST`
+- **Endpoint**: `http://localhost:3000/gpa`
+- **Headers**:
+  - `Content-Type: application/json`
+- **Body Format**: JSON array of course objects, each with:
+  - `credits` (number)
+  - `grade` (string, e.g. `"A"`, `"B+"`, `"C-"`)
+
+#### 📤 Example Request (JavaScript)
+
 ```js
 fetch("http://gpa-microservice.onrender.com/gpa", {
   method: "POST",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
   body: JSON.stringify([
     { credits: 3, grade: "A" },
     { credits: 4, grade: "B+" },
-    { credits: 2, grade: "C" }
-  ])
+    { credits: 2, grade: "C" },
+  ]),
 });
 ```
-</pre>
 
-#✅ How to Programmatically Receive Data
+### ✅ How to Programmatically **Receive** Data
+
 The microservice responds with a JSON object containing the calculated GPA as a string rounded to two decimal places.
 
-##Example Responses
+#### 📤 Example Response (JavaScript)
 
-<pre>
 ```js
 {
   "gpa": "3.24"
 }
 ```
-</pre>
 
-##Example Response Handling (JavaScript)
+## Example Response Handling (JavaScript)
 
-<pre>
 ```js
 const response = await fetch("http://gpa-microservice.onrender.com/gpa", {
   method: "POST",
@@ -53,11 +52,10 @@ const response = await fetch("http://gpa-microservice.onrender.com/gpa", {
   body: JSON.stringify([
     { credits: 3, grade: "A" },
     { credits: 4, grade: "B+" },
-    { credits: 2, grade: "C" }
-  ])
+    { credits: 2, grade: "C" },
+  ]),
 });
 
 const result = await response.json();
 console.log("GPA:", result.gpa); // Outputs: "3.24"
 ```
-</pre>
